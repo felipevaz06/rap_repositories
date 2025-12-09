@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_TRAP100_FVF'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_TRAP100_FVF'
+  }
+}
+define service ZUI_TRAP100_FVF_O4 provider contracts odata_v4_ui {
+  expose ZC_TRAP100_FVF;
+}

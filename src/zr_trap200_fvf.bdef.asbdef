@@ -1,0 +1,53 @@
+managed with unmanaged save implementation in class ZBP_R_TRAP200_FVF unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_TRAP200_FVF alias Travel
+implementation in class ZBP_R_TRAP200_FVF unique
+//persistent table ZTRAP200_FVF
+extensible
+draft table ZTRAP200_FVF_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+early numbering
+{
+
+  field ( readonly )
+   CreatedBy,
+   CreatedAt,
+   LocalLastChangedBy,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+  field ( readonly )
+   TravelID;
+
+
+  create;
+  update;
+  delete;
+
+ // action ( features : instance ) set_status_booked result [1] $self;
+
+ determination setStatusToNew on modify { create; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZTRAP200_FVF corresponding extensible
+  {
+    TravelID = travel_id;
+    Descripion = descripion;
+    TravelStatus = travel_status;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt = last_changed_at;
+  }
+
+}

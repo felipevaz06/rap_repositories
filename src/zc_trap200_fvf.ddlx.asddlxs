@@ -1,0 +1,108 @@
+@Metadata.layer: #CORE
+
+@UI: { headerInfo: { typeName: 'Travel',
+                     typeNamePlural: 'Travels',
+                     description: { type: #STANDARD, value: 'TravelID' },
+                     title: { type: #STANDARD,
+                              value: 'TravelID' } } }
+annotate view ZC_TRAP200_FVF with
+{
+  @UI.facet: [ { id:            'Travel',
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Travel',
+                 position:      10 }]
+  @UI.identification: [ {
+    position: 10 
+  } ]
+  @UI.lineItem: [ {
+    position: 10 
+  } ]
+  @UI.selectionField: [ {
+    position: 10 
+  } ]
+  TravelID;
+  
+  @UI.identification: [ {
+    position: 20 
+  } ]
+  @UI.lineItem: [ { 
+    position: 20 
+  } ]
+  @UI.selectionField: [ {
+    position: 20 
+  } ]
+  Descripion;
+  
+  @UI: { lineItem:      [ { position: 30,
+                            importance: #HIGH }
+                           ],
+         identification: [ { position: 30  } ],
+         selectionField: [{ position: 30 }],
+         textArrangement:   #TEXT_ONLY }
+  
+  
+  TravelStatus;
+  
+  @UI.hidden: true
+  StatusText;
+  
+  @UI.identification: [ {
+    position: 40 
+  } ] 
+  @UI.lineItem: [ {
+    position: 40 
+  } ]
+  @UI.selectionField: [ {
+    position: 40 
+  } ]
+  CreatedBy;
+  
+  @UI.identification: [ {
+    position: 50 
+  } ]
+  @UI.lineItem: [ {
+    position: 50 
+  } ]
+  @UI.selectionField: [ {
+    position: 50 
+  } ]
+  CreatedAt;
+  
+  @UI.identification: [ {
+    position: 60 
+  } ]
+  @UI.lineItem: [ {
+    position: 60 
+  } ]
+  @UI.selectionField: [ {
+    position: 60 
+  } ]
+  LocalLastChangedBy;
+  
+
+  
+  @UI.identification: [ {
+    position: 80 
+  } ]
+  @UI.lineItem: [ {
+    position: 80 
+  } ]
+  @UI.selectionField: [ {
+    position: 80 
+  } ]
+  LastChangedAt;
+  
+  @EndUserText.label: '_BaseEntity'
+  @UI.identification: [ {
+    position: 90 , 
+    label: '_BaseEntity'
+  } ]
+  @UI.lineItem: [ {
+    position: 90 , 
+    label: '_BaseEntity'
+  } ]
+  @UI.selectionField: [ {
+    position: 90 
+  } ]
+  _BaseEntity;
+}

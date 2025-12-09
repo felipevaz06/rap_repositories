@@ -1,0 +1,80 @@
+managed implementation in class ZBP_R_TRAP100_FVF unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_TRAP100_FVF alias ZrTrap100Fvf
+persistent table ztrap100_fvf
+extensible
+draft table ztrap100_fvf_d
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global )
+early numbering
+{
+
+
+  field ( readonly )
+  CreatedBy,
+  CreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  field ( readonly )
+  TravelID;
+
+
+  field ( mandatory )
+  CustomerID,
+  BeginDate,
+  EndDate;
+
+
+  create;
+  update ( features : instance ) ;
+  delete ( features : instance ) ;
+
+  determination setStatusToOpen on modify { create; }
+
+
+  validation validateCustomer on save { create; field CustomerID; }
+  validation validateDates on save { create; field BeginDate, EndDate; }
+
+  action ( features : instance ) deductDiscount parameter /dmo/a_travel_discount result [1] $self;
+  factory action copyTravel [1];
+  action ( features : instance ) acceptTravel result [1] $self;
+  action ( features : instance ) rejectTravel result [1] $self;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action ( features : instance ) Edit;
+  draft action Resume;
+
+  draft determine action Prepare
+  {
+    validation validateCustomer;
+    validation validateDates; }
+
+  mapping for ztrap100_fvf corresponding extensible
+    {
+      TravelID           = travel_id;
+      AgencyID           = agency_id;
+      CustomerID         = customer_id;
+      BeginDate          = begin_date;
+      EndDate            = end_date;
+      BookingFee         = booking_fee;
+      TotalPrice         = total_price;
+      CurrencyCode       = currency_code;
+      Description        = description;
+      OverallStatus      = overall_status;
+      Attachment         = attachment;
+      MimeType           = mime_type;
+      FileName           = file_name;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+
+}
